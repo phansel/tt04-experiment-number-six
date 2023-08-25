@@ -14,16 +14,10 @@ module tt_um_experiment_number_six (
 
 wire reset = ~rst_n;
 
+assign uio_out = 8'b11111111;
+assign uio_oe = 8'b11111111;
+assign uo_out = 8'b11111111;
 
-// what is the idea?
-// rwkv in silicon?
-
-// something silly?
-
-// a GAN or something?
-
-
-// maybe a crc core?
 
 
 endmodule
