@@ -118,8 +118,9 @@ input wire [7:0] line,
 output reg [15:0] addr);
 
 always @* begin
-    if (rst)
+    if (rst) begin
         addr = 16'b0000001100000000;
+    end else begin
     case(line)
 """
 
@@ -142,6 +143,7 @@ while linestowrite >0:
 
 endline_line_mapper = """    default: addr = 16'b0000001100000000;
     endcase;
+    end
 end
 
 endmodule"""
