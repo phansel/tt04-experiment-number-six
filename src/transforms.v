@@ -26,14 +26,17 @@ endmodule
 
 module line_mapper(
 input wire clk,
+input wire rst,
 input wire [7:0] line, 
 output reg [15:0] addr);
 
-always @(posedge clk) begin
+always @(posedge clk, posedge rst) begin
+    if (rst)
+        addr <= 16'b0000001100000000;
     case(line)
-    8'b00000000: addr = 16'b0000001100000000;
-    8'b00000001: addr = 16'b0000010100000011;
-    default: addr = 16'b0000001100000000;
+    8'b00000000: addr <= 16'b0000001100000000;
+    8'b00000001: addr <= 16'b0000010100000011;
+    default: addr <= 16'b0000001100000000;
     endcase;
 end
 

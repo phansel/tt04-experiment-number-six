@@ -65,6 +65,7 @@ memory_chars memory_1 (
 // gets the appropriate indices for each line
 line_mapper line_mapper_1 (
     .clk(clk),
+    .rst(rst),
     .line(line),
     .addr(pointer_addr)
 );
