@@ -28,8 +28,8 @@ output reg [11:0] addr);
 
 always @(posedge clk) begin
     case(line)
-    8'b00000000: addr <= 12'b000011000011;
-    8'b00000001: addr <= 12'b000101000101;
+    8'b00000000: addr <= 12'b000011000000;
+    8'b00000001: addr <= 12'b000101000011;
     endcase;
 end
 
@@ -51,8 +51,8 @@ input wire [15:0] mem_dout // what's the data
 
 wire [5:0] line_start, line_len;
 
-assign line_start = pointer_addr[11:6];
-assign line_len = pointer_addr[5:0];
+assign line_start = pointer_addr[5:0];
+assign line_len = pointer_addr[11:6];
 
 // output assignment - the ascii chars
 assign lhs = mem_dout[15:8];
@@ -67,7 +67,7 @@ always @(posedge clk) begin
         char_count <= 8'd0;
     end else begin
         if (char_count < line_len) begin
-            mem_addr <= char_ptr + 1;
+            mem_addr <= mem_addr + 1;
             char_count <= char_count + 1;
         end else begin
             // out of bounds or whatever

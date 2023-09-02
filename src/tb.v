@@ -19,7 +19,7 @@ module tb();
 	ui_in = 0;
   	#1;
 	rst_n = 0;
-	#5; 
+	#10; 
 	rst_n = 1;
     end
 

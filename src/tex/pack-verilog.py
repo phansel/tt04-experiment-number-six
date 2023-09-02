@@ -18,8 +18,8 @@ input wire [15:0] mem_dout // what's the data
 
 wire [5:0] line_start, line_len;
 
-assign line_start = pointer_addr[11:6];
-assign line_len = pointer_addr[5:0];
+assign line_start = pointer_addr[5:0];
+assign line_len = pointer_addr[11:6];
 
 // output assignment - the ascii chars
 assign lhs = mem_dout[15:8];
@@ -34,7 +34,7 @@ always @(posedge clk) begin
         char_count <= 8'd0;
     end else begin
         if (char_count < line_len) begin
-            mem_addr <= char_ptr + 1;
+            mem_addr <= mem_addr + 1;
             char_count <= char_count + 1;
         end else begin
             // out of bounds or whatever
@@ -124,9 +124,10 @@ print("writing " + str(linestowrite) + " lines")
 line = 0
 print("where dict, line: [start_in_mem, chars]")
 print(where)
+# packing: 12'b[length][start_address]
 while linestowrite >0:
     str_to_write = ""
-    number_of_this_line = "{0:06b}".format(where[line][1]) + "{0:06b}".format(where[line][1])
+    number_of_this_line = "{0:06b}".format(where[line][1]) + "{0:06b}".format(where[line][0])
     str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 12'b" + number_of_this_line + ";\n"
     print(str_to_write)
     linestowrite -= 1
