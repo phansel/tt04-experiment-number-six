@@ -8,6 +8,7 @@ project:
   source_files:        
     - tt_um_experiment_number_six.v
     - transforms.v
+    - transformer.v
 #    - two_bit_mult.v
 #    - counter.v
 #    - decoder.v
