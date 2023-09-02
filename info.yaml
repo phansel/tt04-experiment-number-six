@@ -9,9 +9,6 @@ project:
     - tt_um_experiment_number_six.v
     - transforms.v
     - transformer.v
-#    - two_bit_mult.v
-#    - counter.v
-#    - decoder.v
   top_module:  "tt_um_experiment_number_six"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
@@ -25,28 +22,27 @@ yaml_version: 4
 #
 # Here is a great example: https://github.com/davidsiaw/tt02-davidsiaw-stackcalc/blob/38c5647f83aad2aec675d566aa3d67b98f0aac81/info.yaml
 documentation: 
-  author:       "Paul Hansel"      # Your name
-  title:        "Experiment Number Six"      # Project title
-  language:     "Verilog" # other examples include Verilog, Amaranth, VHDL, etc
+  author:       "Paul Hansel"
+  title:        "Experiment Number Six"
+  language:     "Verilog" 
   description:  "ASCII encoding of the LaTeX characters needed to draw the Laplace transforms of a few functions."
-                # Short description of what your project does
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
       This project provides an ASCII encoding of the LaTeX code to 
       typeset a few dozen Laplace transforms of common functions.
-      When the user sets the ui_in[5:0] pins to a number, asserts 
-      reset and then asserts ui_in[6] high, the project will begin 
+      When the user sets the lower ui_in pins to a number, asserts 
+      reset and then asserts ui_in 6 high, the project will begin 
       clocking out the transform char-by-char, with uio_out showing
       F(s) = L{f(t)} and uo_out showing f(t) itself. If either one
       is shorter than the other for a particular transform, empty 
       space characters are appended.  
+
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      Running "make" in the src folder should test at least one transform 
-      for correctness against the test file. Oh, testing physically? You'd 
-      need to program ui_in[5:0] to some pattern (don't pick numbers that 
-      are too high), toggle reset_n, then toggle ui_in[6] to start printing.
+      You'd need to program ui_in[5:0] to some pattern (don't pick numbers 
+      that are too high), toggle reset_n, then toggle ui_in[6] to start 
+      printing.
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
@@ -60,6 +56,7 @@ documentation:
     - uo_out[7:0]: ASCII output of the right hand side ASCII LaTeX encoding
 # A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
   bidirectional:
+    - 
 
 # The following fields are optional
   tag:          "memory, laplace, mathematics, LaTeX"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
