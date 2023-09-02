@@ -42,6 +42,7 @@ wire [15:0] mem_dout;
 wire rst;
 assign rst = ~rst_n;
 
+
 transformer transformer_1 (
     .start(start),
 	.line(line),
@@ -58,15 +59,15 @@ transformer transformer_1 (
 // stores the transforms as packed ascii
 memory_chars memory_1 (
     .addr(mem_addr),
-    .dout(mem_dout),
-    .clk(clk),
-    .rst(rst)
+    .dout(mem_dout) //,
+    // .clk(clk),
+    // .rst(rst)
 );
 
 // gets the appropriate indices for each line
 line_mapper line_mapper_1 (
-    .clk(clk),
-    .rst(rst),
+    // .clk(clk),
+    // .rst(rst),
     .line(line),
     .addr(pointer_addr)
 );

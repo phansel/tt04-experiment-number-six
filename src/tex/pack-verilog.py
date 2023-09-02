@@ -8,13 +8,15 @@ line = 0
 
 startmemline = """module memory_chars(
 input wire [7:0] addr, 
-output reg [15:0] dout, 
-input rst,
-input clk);
+output reg [15:0] dout //,
+// input rst,
+// input clk
+);
 
-always @(posedge clk, posedge rst) begin
-    if (rst)
-        dout <= 16'b0010000000100000;
+//always @(posedge clk, posedge rst) begin
+always @(addr) begin
+    //if (rst)
+    //    dout <= 16'b0010000000100000;
     case(addr) 
 """
 
@@ -72,14 +74,15 @@ ver.write("\n")
 
 
 startline2 = """module line_mapper(
-input wire clk,
-input wire rst,
+//input wire clk,
+//input wire rst,
 input wire [7:0] line, 
 output reg [15:0] addr);
 
-always @(posedge clk, posedge rst) begin
-    if (rst)
-        addr <= 16'b0000001100000000;
+//always @(posedge clk, posedge rst) begin
+always @(line) begin
+    // if (rst)
+    //     addr <= 16'b0000001100000000;
     case(line)
 """
 
