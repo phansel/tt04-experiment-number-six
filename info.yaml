@@ -7,7 +7,7 @@ project:
 # Source files must be in ./src and you must list each source file separately
   source_files:        
     - tt_um_experiment_number_six.v
-    - tex/transforms.v
+    - transforms.v
 #    - two_bit_mult.v
 #    - counter.v
 #    - decoder.v

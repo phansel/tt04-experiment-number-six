@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 tex = open("transforms.tex", 'r')
-ver = open("transforms.v", 'w')
+ver = open("../transforms.v", 'w')
 print("trying to open transforms.tex")
 linestoread=2
 line = 0
