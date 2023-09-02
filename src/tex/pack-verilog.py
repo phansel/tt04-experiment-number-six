@@ -28,7 +28,7 @@ assign rhs = mem_dout[7:0];
 reg [7:0] char_count;
 
 // set the addresses according to what we'd expect
-always @(posedge clk) begin
+always @(posedge clk, negedge rst) begin
     if (~rst_n) begin
         mem_addr <= line_start;
         char_count <= 8'd0;
