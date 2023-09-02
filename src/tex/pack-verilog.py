@@ -3,7 +3,7 @@
 tex = open("transforms.tex", 'r')
 ver = open("../transforms.v", 'w')
 print("trying to open transforms.tex")
-linestoread=28
+linestoread=25
 line = 0
 
 startmemline = """module memory_chars(
@@ -51,7 +51,7 @@ while linestoread>0:
         print("ind: " + str(ind))
         # very wasteful but maybe it can actually work
         for char in range(ind):
-            strtowrite += "       10'b" + '{0:010b}'.format(addr + char) + ": dout <= 16'b" + '{0:08b}'.format(ord(lhs[char])) + "{0:08b}".format(ord(rhs[char])) + ";\n"
+            strtowrite += "        10'b" + '{0:010b}'.format(addr + char) + ": dout <= 16'b" + '{0:08b}'.format(ord(lhs[char])) + "{0:08b}".format(ord(rhs[char])) + ";\n"
         # add padding 
         strtowrite += "        10'b" + '{0:010b}'.format(addr + ind + 1) + ": dout <= 16'b" + '{0:08b}'.format(ord(" ")) + "{0:08b}".format(ord(" ")) + ";\n"
         where[line] = [addr, ind]
