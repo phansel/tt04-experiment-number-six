@@ -1,4 +1,5 @@
 module transformer(
+input wire start, // goes high when the user wants to start printing
 input wire [7:0] line, // which line do we want?
 input wire clk,        // clock
 input wire rst,      // reset
@@ -20,32 +21,26 @@ assign line_len = pointer_addr[15:8];
 assign lhs = mem_dout[15:8];
 assign rhs = mem_dout[7:0];
 
-reg [7:0] char_count;
-
-reg started;
+reg [7:0] chars_remaining;
 
 // set the addresses according to what we'd expect
 always @(posedge clk) begin
     if (rst) begin
         mem_addr = 8'hFF;
-        char_count = 8'd0;
-        started = 1'd0;
+        chars_remaining = 8'd0;
     end
-    else begin
-        if (~started) begin
-            mem_addr = line_start;
-            char_count = 0;
-            started = 1'd1;
-        end
-        else if ((char_count < line_len) && started) begin
+    else if (~start) begin
+        mem_addr = line_start;
+        chars_remaining = line_len;
+    end
+    else if (chars_remaining > 0) begin
             mem_addr = mem_addr + 1;
-            char_count = char_count + 1;
-        end
-        else begin
-            // out of bounds or whatever
-            mem_addr = 8'b11111111;
-        end
+            chars_remaining = chars_remaining - 1;
     end
+    else if (chars_remaining == 0) begin
+        mem_addr = 8'hFF;
+    end
+
 end
 
 endmodule
