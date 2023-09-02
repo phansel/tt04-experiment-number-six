@@ -113,10 +113,13 @@ ver.write("\n")
 
 
 startline2 = """module line_mapper(
+input wire rst,
 input wire [7:0] line, 
 output reg [15:0] addr);
 
 always @* begin
+    if (rst)
+        addr = 16'b0000001100000000;
     case(line)
 """
 
