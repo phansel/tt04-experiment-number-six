@@ -8,7 +8,7 @@ line = 0
 startline = """module transformer(
 input wire [7:0] line, // which line do we want?
 input wire clk,        // clock
-input wire rst_n,      // reset_n
+input wire rst,      // reset
 output wire [7:0] lhs, // input version
 output wire [7:0] rhs, // transformed version
 input wire [15:0] pointer_addr, // what is the array ref for this txform?
@@ -29,8 +29,8 @@ assign rhs = mem_dout[7:0];
 reg [7:0] char_count;
 
 // set the addresses according to what we'd expect
-always @(posedge clk, negedge rst_n) begin
-    if (~rst_n) begin
+always @(posedge clk, posedge rst) begin
+    if (rst) begin
         mem_addr <= line_start;
         char_count <= 8'd0;
     end else begin

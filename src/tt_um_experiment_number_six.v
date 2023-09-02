@@ -45,7 +45,7 @@ assign rst = ~rst_n;
 transformer transformer_1 (
 	.line(line),
 	.clk(clk),
-	.rst_n(rst_n),
+	.rst(rst),
 	.lhs(lhs),
 	.rhs(rhs),
 	.pointer_addr(pointer_addr),
