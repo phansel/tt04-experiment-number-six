@@ -116,7 +116,7 @@ startline2 = """module line_mapper(
 input wire [7:0] line, 
 output reg [15:0] addr);
 
-always @(line) begin
+always @* begin
     case(line)
 """
 
@@ -131,13 +131,13 @@ print(where)
 while linestowrite >0:
     str_to_write = ""
     number_of_this_line = "{0:08b}".format(where[line][1]) + "{0:08b}".format(where[line][0])
-    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 16'b" + number_of_this_line + ";\n"
+    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr = 16'b" + number_of_this_line + ";\n"
     print(str_to_write)
     linestowrite -= 1
     line += 1
     ver.write(str_to_write)
 
-endline_line_mapper = """    default: addr <= 16'b0000001100000000;
+endline_line_mapper = """    default: addr = 16'b0000001100000000;
     endcase;
 end
 

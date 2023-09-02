@@ -28,11 +28,11 @@ module line_mapper(
 input wire [7:0] line, 
 output reg [15:0] addr);
 
-always @(line) begin
+always @* begin
     case(line)
-    8'b00000000: addr <= 16'b0000001100000000;
-    8'b00000001: addr <= 16'b0000010100000011;
-    default: addr <= 16'b0000001100000000;
+    8'b00000000: addr = 16'b0000001100000000;
+    8'b00000001: addr = 16'b0000010100000011;
+    default: addr = 16'b0000001100000000;
     endcase;
 end
 
