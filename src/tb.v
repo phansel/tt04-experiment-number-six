@@ -1,5 +1,5 @@
 `default_nettype none
-`timescale 1us/1ns
+`timescale 1ns/1ps
 
 module tb();
     
@@ -15,12 +15,12 @@ module tb();
     initial begin
         $dumpfile ("tb.vcd");
         $dumpvars (0, tb);
-	rst_n = 1;
-	ui_in = 0;
-  	#1;
-	rst_n = 0;
-	#10; 
-	rst_n = 1;
+	//rst_n = 1;
+	//ui_in = 0;
+  	//#1;
+	//rst_n = 0;
+	//#5; 
+	//rst_n = 1;
     end
 
 

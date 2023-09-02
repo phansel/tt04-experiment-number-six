@@ -22,18 +22,28 @@ assign rhs = mem_dout[7:0];
 
 reg [7:0] char_count;
 
+reg started;
+
 // set the addresses according to what we'd expect
-always @(posedge clk, posedge rst) begin
+always @(posedge clk) begin
     if (rst) begin
-        mem_addr <= line_start;
-        char_count <= 8'd0;
-    end else begin
-        if (char_count < line_len) begin
-            mem_addr <= mem_addr + 1;
-            char_count <= char_count + 1;
-        end else begin
+        mem_addr = 8'hFF;
+        char_count = 8'd0;
+        started = 1'd0;
+    end
+    else begin
+        if (~started) begin
+            mem_addr = line_start;
+            char_count = 0;
+            started = 1'd1;
+        end
+        else if ((char_count < line_len) && started) begin
+            mem_addr = mem_addr + 1;
+            char_count = char_count + 1;
+        end
+        else begin
             // out of bounds or whatever
-            mem_addr <= 8'b11111111;
+            mem_addr = 8'b11111111;
         end
     end
 end
