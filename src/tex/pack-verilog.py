@@ -6,21 +6,21 @@ print("trying to open transforms.tex")
 linestoread=2
 line = 0
 startline = """module transformer(
-input wire [5:0] line, // which line do we want?
+input wire [7:0] line, // which line do we want?
 input wire clk,        // clock
 input wire rst_n,      // reset_n
 output wire [7:0] lhs, // input version
 output wire [7:0] rhs, // transformed version
-input wire [11:0] pointer_addr, // what is the array ref for this txform?
+input wire [15:0] pointer_addr, // what is the array ref for this txform?
 output reg [7:0] mem_addr, // which address in memory has our chars?
 input wire [15:0] mem_dout // what's the data 
 );\n 
 
-wire [5:0] line_start;
-wire [5:0] line_len;
+wire [7:0] line_start;
+wire [7:0] line_len;
 
-assign line_start = pointer_addr[5:0];
-assign line_len = pointer_addr[11:6];
+assign line_start = pointer_addr[7:0];
+assign line_len = pointer_addr[15:8];
 
 // output assignment - the ascii chars
 assign lhs = mem_dout[15:8];
@@ -39,7 +39,7 @@ always @(posedge clk, negedge rst_n) begin
             char_count <= char_count + 1;
         end else begin
             // out of bounds or whatever
-            mem_addr = 8'b11111111;
+            mem_addr <= 8'b11111111;
         end
     end
 end
@@ -113,8 +113,8 @@ ver.write("\n")
 
 
 startline2 = """module line_mapper(
-input wire [5:0] line, 
-output reg [11:0] addr);
+input wire [7:0] line, 
+output reg [15:0] addr);
 
 always @(line) begin
     case(line)
@@ -130,14 +130,14 @@ print(where)
 # packing: 12'b[length][start_address]
 while linestowrite >0:
     str_to_write = ""
-    number_of_this_line = "{0:06b}".format(where[line][1]) + "{0:06b}".format(where[line][0])
-    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 12'b" + number_of_this_line + ";\n"
+    number_of_this_line = "{0:08b}".format(where[line][1]) + "{0:08b}".format(where[line][0])
+    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 16'b" + number_of_this_line + ";\n"
     print(str_to_write)
     linestowrite -= 1
     line += 1
     ver.write(str_to_write)
 
-endline_line_mapper = """    default: addr <= 12'b000011000000;
+endline_line_mapper = """    default: addr <= 16'b0000001100000000;
     endcase;
 end
 

@@ -25,14 +25,14 @@ endmodule
 
 
 module line_mapper(
-input wire [5:0] line, 
-output reg [11:0] addr);
+input wire [7:0] line, 
+output reg [15:0] addr);
 
 always @(line) begin
     case(line)
-    8'b00000000: addr <= 12'b000011000000;
-    8'b00000001: addr <= 12'b000101000011;
-    default: addr <= 12'b000011000000;
+    8'b00000000: addr <= 16'b0000001100000000;
+    8'b00000001: addr <= 16'b0000010100000011;
+    default: addr <= 16'b0000001100000000;
     endcase;
 end
 
@@ -41,22 +41,22 @@ endmodule
 
 
 module transformer(
-input wire [5:0] line, // which line do we want?
+input wire [7:0] line, // which line do we want?
 input wire clk,        // clock
 input wire rst_n,      // reset_n
 output wire [7:0] lhs, // input version
 output wire [7:0] rhs, // transformed version
-input wire [11:0] pointer_addr, // what is the array ref for this txform?
+input wire [15:0] pointer_addr, // what is the array ref for this txform?
 output reg [7:0] mem_addr, // which address in memory has our chars?
 input wire [15:0] mem_dout // what's the data 
 );
  
 
-wire [5:0] line_start;
-wire [5:0] line_len;
+wire [7:0] line_start;
+wire [7:0] line_len;
 
-assign line_start = pointer_addr[5:0];
-assign line_len = pointer_addr[11:6];
+assign line_start = pointer_addr[7:0];
+assign line_len = pointer_addr[15:8];
 
 // output assignment - the ascii chars
 assign lhs = mem_dout[15:8];
@@ -75,7 +75,7 @@ always @(posedge clk, negedge rst_n) begin
             char_count <= char_count + 1;
         end else begin
             // out of bounds or whatever
-            mem_addr = 8'b11111111;
+            mem_addr <= 8'b11111111;
         end
     end
 end

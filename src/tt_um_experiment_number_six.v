@@ -35,10 +35,10 @@ reg [1:0] cnt_div_pre; // divide the clock by 2**(2**(cnt_div*2))
 reg [31:0] cnt;
 
 
-wire [5:0] line;
+wire [7:0] line;
 wire [7:0] lhs, rhs;
 wire [7:0] mem_addr;
-wire [11:0] pointer_addr;
+wire [15:0] pointer_addr;
 wire [15:0] mem_dout;
 
 wire rst;
@@ -70,7 +70,8 @@ line_mapper line_mapper_1 (
     .addr(pointer_addr)
 );
 
-assign line = ui_in[5:0];
+// ignore top two bits for now
+assign line = {2'b0, ui_in[5:0]};
 assign uio_out = lhs;
 assign uo_out = rhs;
 
