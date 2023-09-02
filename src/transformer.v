@@ -39,7 +39,7 @@ always @(posedge clk) begin
     else begin
         if ( (chars_remaining > 0) && (started) ) begin
         mem_addr <= mem_addr + 1;
-        chars_remaining <= chars_remaining;
+        chars_remaining <= chars_remaining - 1;
         end else begin
             started <= 1'b1;
         end

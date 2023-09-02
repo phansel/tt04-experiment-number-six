@@ -33,7 +33,7 @@ async def test_txformer(dut):
         ind = max(lhsl, rhsl)
         rhs = rhs.ljust(ind)
         lhs = lhs.ljust(ind)
-        res_dict[0] = [lhs, rhs]
+        res_dict[x] = [lhs, rhs]
     tex.close()
     dut._log.info("start")
     dut._log.info("check that our expected trausforms are seen")
@@ -57,6 +57,6 @@ async def test_txformer(dut):
         dut._log.info("expecting lhs: '" + (res_dict[0][0][char]) + "'")
         # targeted_lhs = (res_dict[0][0][char]) + "'")
         dut._log.info("expecting rhs: '" + (res_dict[0][1][char]) + "'")
-        #assert chr(dut.uio_out.value) == res_dict[0][0][char], "failed to match lhs!"
-        #assert chr(dut.uo_out.value) == res_dict[0][1][char], "failed to match rhs!"
+        assert chr(dut.uio_out.value) == res_dict[0][0][char], "failed to match lhs!"
+        assert chr(dut.uo_out.value) == res_dict[0][1][char], "failed to match rhs!"
     await ClockCycles(dut.clk, max_count)
