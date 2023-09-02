@@ -28,49 +28,41 @@ documentation:
   author:       "Paul Hansel"      # Your name
   title:        "Experiment Number Six"      # Project title
   language:     "Verilog" # other examples include Verilog, Amaranth, VHDL, etc
-  description:  ""      # Short description of what your project does
+  description:  "ASCII encoding of the LaTeX characters needed to draw the Laplace transforms of a few functions."
+                # Short description of what your project does
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      It probably should be conceded that it doesn't yet work.
-
+      This project provides an ASCII encoding of the LaTeX code to 
+      typeset a few dozen Laplace transforms of common functions.
+      When the user sets the ui_in[5:0] pins to a number, asserts 
+      reset and then asserts ui_in[6] high, the project will begin 
+      clocking out the transform char-by-char, with uio_out showing
+      F(s) = L{f(t)} and uo_out showing f(t) itself. If either one
+      is shorter than the other for a particular transform, empty 
+      space characters are appended.  
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      It should be trivial to test it by running "make" in the src folder.
+      Running "make" in the src folder should test at least one transform 
+      for correctness against the test file. Oh, testing physically? You'd 
+      need to program ui_in[5:0] to some pattern (don't pick numbers that 
+      are too high), toggle reset_n, then toggle ui_in[6] to start printing.
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
+    - ui_in[5:0] : set the desired Laplace transform
+    - ui_in[6] : start printing out the character at 1 char/clock.
+    - ui_in[7] : set a clock division parameter to print more slowly (not yet implemented)
+
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
-    - segment a
-    - segment b
-    - segment c
-    - segment d
-    - segment e
-    - segment f
-    - segment g
-    - dot
+    - uio_out[7:0]: ASCII output of the left hand side ASCII LaTeX encoding
+    - uo_out[7:0]: ASCII output of the right hand side ASCII LaTeX encoding
 # A description of what the bidirectional I/O pins do (e.g. I2C SDA, I2C SCL, etc)
   bidirectional:
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
-    - none
 
 # The following fields are optional
-  tag:          ""      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
+  tag:          "memory, laplace, mathematics, LaTeX"      # comma separated list of tags: test, encryption, experiment, clock, animation, utility, industrial, pwm, fpga, alu, microprocessor, risc, riscv, sensor, signal generator, fft, filter, music, bcd, sound, serial, timer, random number generator, calculator, decoder, counter, puzzle, multiplier, game, oscillator,
   external_hw:  ""      # Describe any external hardware needed
   discord:      "phansel"      # Your discord handle, used for communication and automatically assigning tapeout role after a submission
   doc_link:     ""      # URL to longer form documentation, eg the README.md in your repository
