@@ -8,7 +8,7 @@ project:
   source_files:        
     - tt_um_experiment_number_six.v
     - tex/transforms.v
-    - two_bit_mult.v
+#    - two_bit_mult.v
 #    - counter.v
 #    - decoder.v
   top_module:  "tt_um_experiment_number_six"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
