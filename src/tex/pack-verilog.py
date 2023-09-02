@@ -50,9 +50,11 @@ while linestoread>0:
         # very wasteful but maybe it can actually work
         for char in range(ind):
             strtowrite += "        8'b" + '{0:08b}'.format(addr + char) + ": dout <= 16'b" + '{0:08b}'.format(ord(lhs[char])) + "{0:08b}".format(ord(rhs[char])) + ";\n"
+        # add padding 
+        strtowrite += "        8'b" + '{0:08b}'.format(addr + ind + 1) + ": dout <= 16'b" + '{0:08b}'.format(ord(" ")) + "{0:08b}".format(ord(" ")) + ";\n"
         where[line] = [addr, ind]
         
-        addr += ind
+        addr += ind + 2
         print(strtowrite)
         ver.write(strtowrite)
         #ver.write(strtowrite + "\n")

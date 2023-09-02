@@ -23,24 +23,25 @@ assign rhs = mem_dout[7:0];
 
 reg [7:0] chars_remaining;
 
-// set the addresses according to what we'd expect
 always @(posedge clk) begin
-    if (rst) begin
-        mem_addr = 8'hFF;
-        chars_remaining = 8'd0;
+    if ((rst) && (~start)) begin
+        mem_addr <= 8'hFF;
+        chars_remaining <= 8'd0;
     end
-    else if (~start) begin
-        mem_addr = line_start;
-        chars_remaining = line_len;
+    if ((~rst) && (~start)) begin
+        mem_addr <= line_start;
+        chars_remaining <= line_len;
     end
-    else if (chars_remaining > 0) begin
-            mem_addr = mem_addr + 1;
-            chars_remaining = chars_remaining - 1;
+    else begin
+        if ( chars_remaining > 0) begin
+        mem_addr <= mem_addr + 1;
+        chars_remaining <= chars_remaining - 1;
+        end
     end
+    /*
     else if (chars_remaining == 0) begin
         mem_addr = 8'hFF;
-    end
-
+    */
 end
 
 endmodule
