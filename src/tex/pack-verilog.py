@@ -16,7 +16,8 @@ output reg [7:0] mem_addr, // which address in memory has our chars?
 input wire [15:0] mem_dout // what's the data 
 );\n 
 
-wire [5:0] line_start, line_len;
+wire [5:0] line_start;
+wire [5:0] line_len;
 
 assign line_start = pointer_addr[5:0];
 assign line_len = pointer_addr[11:6];
@@ -134,7 +135,8 @@ while linestowrite >0:
     line += 1
     ver.write(str_to_write)
 
-endline_line_mapper = """    endcase;
+endline_line_mapper = """    default: addr <= 12'b000011000000;
+    endcase;
 end
 
 endmodule"""
