@@ -47,8 +47,9 @@ async def test_txformer(dut):
         dut.clk.value = 1;
         await Timer(1, units="us")
         # use the chr(ord("c")) function to get ascii->char
-        dut._log.info("seeing lhs: '" + chr(dut.uo_out.value) + "'")
-        dut._log.info("seeing rhs: '" + chr(dut.uio_out.value) + "'")
+        dut._log.info("seeing lhs: '" + chr(dut.uio_out.value) + "'")
+        dut._log.info("seeing rhs: '" + chr(dut.uo_out.value) + "'")
         dut._log.info("expecting lhs: '" + (res_dict[0][0][char]) + "'")
         dut._log.info("expecting rhs: '" + (res_dict[0][1][char]) + "'")
-        #assert dut.uo_out.value == res_dict[0][char], "failed to match!"
+        assert chr(dut.uio_out.value) == res_dict[0][0][char], "failed to match lhs!"
+        assert chr(dut.uo_out.value) == res_dict[0][1][char], "failed to match rhs!"

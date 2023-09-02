@@ -1,9 +1,12 @@
 module memory(
 input wire [7:0] addr, 
 output reg [15:0] dout, 
+input rst,
 input clk);
 
-always @(posedge clk) begin
+always @(posedge clk, posedge rst) begin
+    if (rst)
+        dout <= 16'b0010000000100000;
     case(addr) 
         8'b00000000: dout <= 16'b0011000100110001;
         8'b00000001: dout <= 16'b0010111100100000;

@@ -16,7 +16,7 @@ module tb();
         $dumpfile ("tb.vcd");
         $dumpvars (0, tb);
 	rst_n = 1;
-	ui_in = 1;
+	ui_in = 0;
   	#1;
 	rst_n = 0;
 	#10; 

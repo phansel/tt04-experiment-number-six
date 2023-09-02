@@ -41,6 +41,9 @@ wire [7:0] mem_addr;
 wire [11:0] pointer_addr;
 wire [15:0] mem_dout;
 
+wire rst;
+assign rst = ~rst_n;
+
 transformer transformer_1 (
 	.line(line),
 	.clk(clk),
@@ -57,7 +60,8 @@ transformer transformer_1 (
 memory memory_1 (
     .addr(mem_addr),
     .dout(mem_dout),
-    .clk(clk)
+    .clk(clk),
+	.rst(rst)
 );
 
 // gets the appropriate indices for each line
