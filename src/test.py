@@ -20,7 +20,7 @@ async def test_txformer(dut):
     dut.rst_n.value = 1;
     cocotb.start_soon(clock.start())
     tex = open("tex/transforms.tex", "r")
-    txform_to_test = 17
+    txform_to_test = 19
     res_dict = {}
     # hacky
     for x in range(txform_to_test+1):
