@@ -22,11 +22,10 @@ endmodule
 
 
 module line_mapper(
-input wire clk, 
 input wire [5:0] line, 
 output reg [11:0] addr);
 
-always @(posedge clk) begin
+always @(line) begin
     case(line)
     8'b00000000: addr <= 12'b000011000000;
     8'b00000001: addr <= 12'b000101000011;

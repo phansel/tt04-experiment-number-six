@@ -110,11 +110,10 @@ ver.write("\n")
 
 
 startline2 = """module line_mapper(
-input wire clk, 
 input wire [5:0] line, 
 output reg [11:0] addr);
 
-always @(posedge clk) begin
+always @(line) begin
     case(line)
 """
 
