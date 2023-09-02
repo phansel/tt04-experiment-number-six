@@ -33,20 +33,11 @@ documentation:
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
-      This project provides an ASCII encoding of the LaTeX code to 
-      typeset a few dozen Laplace transforms of common functions.
-      When the user sets the ui_in[5:0] pins to a number, asserts 
-      reset and then asserts ui_in[6] high, the project will begin 
-      clocking out the transform char-by-char, with uio_out showing
-      F(s) = L{f(t)} and uo_out showing f(t) itself. If either one
-      is shorter than the other for a particular transform, empty 
-      space characters are appended.  
+      "This project provides an ASCII encoding of the LaTeX code to typeset a few dozen Laplace transforms of common functions. When the user sets the ui_in[5:0] pins to a number, asserts reset and then asserts ui_in[6] high, the project will begin clocking out the transform char-by-char, with uio_out showing F(s) = L{f(t)} and uo_out showing f(t) itself. If either one is shorter than the other for a particular transform, empty space characters are appended."
+
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
-      Running "make" in the src folder should test at least one transform 
-      for correctness against the test file. Oh, testing physically? You'd 
-      need to program ui_in[5:0] to some pattern (don't pick numbers that 
-      are too high), toggle reset_n, then toggle ui_in[6] to start printing.
+    "You will need to program ui_in[5:0] to some pattern (don't pick numbers that are too high), toggle reset_n, then toggle ui_in[6] to start printing."
 
 # A description of what the inputs do (e.g. red button, SPI CLK, SPI MOSI, etc).
   inputs:               
