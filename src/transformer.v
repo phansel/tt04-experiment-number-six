@@ -23,19 +23,25 @@ assign rhs = mem_dout[7:0];
 
 reg [7:0] chars_remaining;
 
+reg started;
+
 always @(posedge clk) begin
     if ((rst) && (~start)) begin
         mem_addr <= 8'hFF;
         chars_remaining <= 8'd0;
+        started <= 1'b0;
     end
     if ((~rst) && (~start)) begin
         mem_addr <= line_start;
         chars_remaining <= line_len;
+        started <= 1'b0;
     end
     else begin
-        if ( chars_remaining > 0) begin
+        if ( (chars_remaining > 0) && (started) ) begin
         mem_addr <= mem_addr + 1;
-        chars_remaining <= chars_remaining - 1;
+        chars_remaining <= chars_remaining;
+        end else begin
+            started <= 1'b1;
         end
     end
     /*
