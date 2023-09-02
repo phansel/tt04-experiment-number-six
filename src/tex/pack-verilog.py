@@ -25,21 +25,20 @@ assign line_len = pointer_addr[5:0];
 assign lhs = mem_dout[15:8];
 assign rhs = mem_dout[7:0];
 
-reg [7:0] char_ptr;
 reg [7:0] char_count;
 
 // set the addresses according to what we'd expect
 always @(posedge clk) begin
     if (~rst_n) begin
-        char_ptr <= line_start;
+        mem_addr <= line_start;
         char_count <= 8'd0;
     end else begin
         if (char_count < line_len) begin
-            char_ptr <= char_ptr + 1;
+            mem_addr <= char_ptr + 1;
             char_count <= char_count + 1;
         end else begin
             // out of bounds or whatever
-            char_ptr = 8'b11111111;
+            mem_addr = 8'b11111111;
         end
     end
 end
