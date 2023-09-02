@@ -3,11 +3,11 @@
 tex = open("transforms.tex", 'r')
 ver = open("../transforms.v", 'w')
 print("trying to open transforms.tex")
-linestoread=10
+linestoread=13
 line = 0
 
 startmemline = """module memory_chars(
-input wire [7:0] addr, 
+input wire [8:0] addr, 
 output reg [15:0] dout //,
 // input rst,
 // input clk
@@ -51,9 +51,9 @@ while linestoread>0:
         print("ind: " + str(ind))
         # very wasteful but maybe it can actually work
         for char in range(ind):
-            strtowrite += "        8'b" + '{0:08b}'.format(addr + char) + ": dout <= 16'b" + '{0:08b}'.format(ord(lhs[char])) + "{0:08b}".format(ord(rhs[char])) + ";\n"
+            strtowrite += "        9'b" + '{0:09b}'.format(addr + char) + ": dout <= 16'b" + '{0:08b}'.format(ord(lhs[char])) + "{0:08b}".format(ord(rhs[char])) + ";\n"
         # add padding 
-        strtowrite += "        8'b" + '{0:08b}'.format(addr + ind + 1) + ": dout <= 16'b" + '{0:08b}'.format(ord(" ")) + "{0:08b}".format(ord(" ")) + ";\n"
+        strtowrite += "        9'b" + '{0:09b}'.format(addr + ind + 1) + ": dout <= 16'b" + '{0:08b}'.format(ord(" ")) + "{0:08b}".format(ord(" ")) + ";\n"
         where[line] = [addr, ind]
         
         addr += ind + 2
@@ -62,6 +62,7 @@ while linestoread>0:
         #ver.write(strtowrite + "\n")
         linestoread -= 1
         line += 1
+        print("addr in mem: " +str(addr))
     except:
         print('out of lines')
         tex.close()
@@ -77,12 +78,12 @@ startline2 = """module line_mapper(
 //input wire clk,
 //input wire rst,
 input wire [7:0] line, 
-output reg [15:0] addr);
+output reg [17:0] addr);
 
 //always @(posedge clk, posedge rst) begin
 always @(line) begin
     // if (rst)
-    //     addr <= 16'b0000001100000000;
+    //     addr <= 18'b0000001100000000;
     case(line)
 """
 
@@ -96,14 +97,14 @@ print(where)
 # packing: 12'b[length][start_address]
 while linestowrite >0:
     str_to_write = ""
-    number_of_this_line = "{0:08b}".format(where[line][1]) + "{0:08b}".format(where[line][0])
-    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 16'b" + number_of_this_line + ";\n"
+    number_of_this_line = "{0:09b}".format(where[line][1]) + "{0:09b}".format(where[line][0])
+    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 18'b" + number_of_this_line + ";\n"
     print(str_to_write)
     linestowrite -= 1
     line += 1
     ver.write(str_to_write)
 
-endline_line_mapper = """    default: addr <= 16'b0000001100000000;
+endline_line_mapper = """    default: addr <= 18'b000000011000000000;
     endcase;
 end
 
