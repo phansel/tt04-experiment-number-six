@@ -57,11 +57,11 @@ transformer transformer_1 (
 
 
 // stores the transforms as packed ascii
-memory memory_1 (
+memory_chars memory_1 (
     .addr(mem_addr),
     .dout(mem_dout),
     .clk(clk),
-	.rst(rst)
+    .rst(rst)
 );
 
 // gets the appropriate indices for each line
