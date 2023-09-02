@@ -35,8 +35,8 @@ reg [31:0] cnt;
 wire start;
 wire [7:0] line;
 wire [7:0] lhs, rhs;
-wire [8:0] mem_addr;
-wire [17:0] pointer_addr;
+wire [9:0] mem_addr;
+wire [19:0] pointer_addr;
 wire [15:0] mem_dout;
 
 wire rst;
