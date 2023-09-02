@@ -113,14 +113,11 @@ ver.write("\n")
 
 
 startline2 = """module line_mapper(
-input wire rst,
+input wire clk,
 input wire [7:0] line, 
 output reg [15:0] addr);
 
-always @* begin
-    if (rst) begin
-        addr = 16'b0000001100000000;
-    end else begin
+always @(posedge clk) begin
     case(line)
 """
 
@@ -143,7 +140,6 @@ while linestowrite >0:
 
 endline_line_mapper = """    default: addr = 16'b0000001100000000;
     endcase;
-    end
 end
 
 endmodule"""
