@@ -8,7 +8,8 @@ output wire [7:0] rhs, // transformed version
 input wire [19:0] pointer_addr, // what is the array ref for this txform?
 output reg [9:0] mem_addr, // which address in memory has our chars?
 input wire [15:0] mem_dout, // what's the data
-output reg [9:0] chars_remaining
+output reg [9:0] chars_remaining,
+output reg [3:0] which_state
 );
 
 
@@ -25,7 +26,6 @@ assign rhs = mem_dout[7:0];
 
 reg started;
 
-reg [3:0] which_state;
 
 always @(posedge clk) begin
     if (rst) begin

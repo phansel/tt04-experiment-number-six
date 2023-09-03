@@ -9,7 +9,8 @@ module tt_um_experiment_number_six (
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
     input  wire       rst_n,     // reset_n - low to reset
-    output wire [9:0] chars_remaining
+    output wire [9:0] chars_remaining,
+    output wire [3:0] which_state
 );
 
 
@@ -42,6 +43,7 @@ wire [9:0] mem_addr;
 wire [19:0] pointer_addr;
 wire [15:0] mem_dout;
 
+
 wire rst;
 assign rst = ~rst_n;
 
@@ -56,7 +58,8 @@ transformer transformer_1 (
 	.pointer_addr(pointer_addr),
 	.mem_addr(mem_addr),
 	.mem_dout(mem_dout),
-	.chars_remaining(chars_remaining)
+	.chars_remaining(chars_remaining),
+	.which_state(which_state)
 );
 
 

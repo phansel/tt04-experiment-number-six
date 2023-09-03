@@ -13,6 +13,7 @@ module tb();
     reg [7:0] uio_oe;
 
     wire [7:0] chars_remaining;
+    wire [3:0] which_state;
 
     initial begin
         $dumpfile ("tb.vcd");
@@ -41,7 +42,8 @@ module tb();
     .ena(ena),
     .clk(clk),
     .rst_n(rst_n),
-    .chars_remaining(chars_remaining)
+    .chars_remaining(chars_remaining),
+    .which_state(which_state)
     );
 
 endmodule
