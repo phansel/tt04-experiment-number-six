@@ -18,6 +18,7 @@ async def test_mult(dut):
 async def test_txformer(dut):
     clock = Clock(dut.clk, 2, units="us")
     dut.rst_n.value = 1;
+    dut.ena.value = 1;
     cocotb.start_soon(clock.start())
     tex = open("tex/transforms.tex", "r")
     txform_to_test = 45
