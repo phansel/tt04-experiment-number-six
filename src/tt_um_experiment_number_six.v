@@ -20,12 +20,7 @@ module tt_um_experiment_number_six (
 
 reg [7:0] direction_reg;
 
-always @(posedge clk) begin
-    if (rst)
-        direction_reg <= 8'b11111111;
-    direction_reg <= 8'b11111111;
-end
-
+assign direction_reg = 8'hFF;
 
 assign uio_oe = direction_reg;
 
