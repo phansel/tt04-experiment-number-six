@@ -12,6 +12,8 @@ module tb();
     reg [7:0] uio_out;
     reg [7:0] uio_oe;
 
+    wire [7:0] chars_remaining;
+
     initial begin
         $dumpfile ("tb.vcd");
         $dumpvars (0, tb);
@@ -22,6 +24,7 @@ module tb();
         //#5;
         //rst_n = 1;
     end
+
 
 
 
@@ -37,7 +40,8 @@ module tb();
     .uio_oe(uio_oe),
     .ena(ena),
     .clk(clk),
-    .rst_n(rst_n)
+    .rst_n(rst_n),
+    .chars_remaining(chars_remaining)
     );
 
 endmodule

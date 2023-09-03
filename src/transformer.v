@@ -7,7 +7,8 @@ output wire [7:0] lhs, // input version
 output wire [7:0] rhs, // transformed version
 input wire [19:0] pointer_addr, // what is the array ref for this txform?
 output reg [9:0] mem_addr, // which address in memory has our chars?
-input wire [15:0] mem_dout // what's the data
+input wire [15:0] mem_dout, // what's the data
+output reg [9:0] chars_remaining
 );
 
 
@@ -21,7 +22,6 @@ assign line_len = pointer_addr[19:10];
 assign lhs = mem_dout[15:8];
 assign rhs = mem_dout[7:0];
 
-reg [9:0] chars_remaining;
 
 reg started;
 

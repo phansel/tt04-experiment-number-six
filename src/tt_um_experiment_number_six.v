@@ -8,7 +8,8 @@ module tt_um_experiment_number_six (
     output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n     // reset_n - low to reset
+    input  wire       rst_n,     // reset_n - low to reset
+    output wire [9:0] chars_remaining
 );
 
 
@@ -54,7 +55,8 @@ transformer transformer_1 (
 	.rhs(rhs),
 	.pointer_addr(pointer_addr),
 	.mem_addr(mem_addr),
-	.mem_dout(mem_dout)
+	.mem_dout(mem_dout),
+	.chars_remaining(chars_remaining)
 );
 
 
