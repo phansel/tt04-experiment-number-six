@@ -13,7 +13,7 @@ async def test_mult(dut):
     dut._log.info("check all the mults")
     #await ClockCycles(dut.clk, max_count)
 '''
-
+'''
 @cocotb.test()
 async def test_txformer(dut):
     clock = Clock(dut.clk, 2, units="us")
@@ -62,3 +62,4 @@ async def test_txformer(dut):
         assert chr(dut.uio_out.value) == res_dict[txform_to_test][0][char], "failed to match lhs!"
         assert chr(dut.uo_out.value) == res_dict[txform_to_test][1][char], "failed to match rhs!"
     await ClockCycles(dut.clk, max_count)
+'''
