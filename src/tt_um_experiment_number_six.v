@@ -18,9 +18,16 @@ module tt_um_experiment_number_six (
 
 // mystery bit: triggers CQ DE KC1GPW
 
-//assign uio_out = 8'b11111111;
-assign uio_oe = 8'b11111111;
-//assign uo_out = 8'b11111111;
+reg [7:0] direction_reg;
+
+always @(posedge clk) begin
+    if (rst)
+        direction_reg <= 8'b11111111;
+    direction_reg <= 8'b11111111;
+end
+
+
+assign uio_oe = direction_reg;
 
 wire [5:0] fn_id;
 
