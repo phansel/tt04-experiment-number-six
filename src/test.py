@@ -62,8 +62,8 @@ async def test_txformer(dut):
             dut._log.info("expecting lhs: '" + (res_dict[txform_to_test][0][char]) + "'")
             # targeted_lhs = (res_dict[0][0][char]) + "'")
             dut._log.info("expecting rhs: '" + (res_dict[txform_to_test][1][char]) + "'")
-            # assert chr(dut.uio_out.value) == res_dict[txform_to_test][0][char], "failed to match lhs!"
-            # assert chr(dut.uo_out.value) == res_dict[txform_to_test][1][char], "failed to match rhs!"
+            assert chr(dut.uio_out.value) == res_dict[txform_to_test][0][char], "failed to match lhs!"
+            assert chr(dut.uo_out.value) == res_dict[txform_to_test][1][char], "failed to match rhs!"
         await Timer(3, units="us")
         dut.ui_in.value = 0
         dut.rst_n.value = 0

@@ -34,17 +34,20 @@ always @(posedge clk) begin
         started <= 1'b0;
         which_state <= 0;
     end else begin
-        if (~start) begin
+        if ((~start) && (~started)) begin
+            // first character
             mem_addr <= line_start;
             chars_remaining <= line_len;
-            started <= 1'b0;
+            started <= 1'b1;
             which_state <= 1;
         end else begin
             if ((chars_remaining > 0)) begin
+            // second -> last characters
             mem_addr <= mem_addr + 1;
             chars_remaining <= chars_remaining - 1;
             which_state <= 2;
             end else begin
+                // last+1 character
                 started <= 1'b1;
                 which_state <= 3;
             end
