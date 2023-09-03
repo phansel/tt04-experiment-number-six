@@ -3,21 +3,20 @@
 tex = open("transforms.tex", 'r')
 ver = open("../transforms.v", 'w')
 print("trying to open transforms.tex")
-linestoread=46
+linestoread=2
 line = 0
 
 startmemline = """module memory_chars(
 input wire [9:0] addr,
-output reg [15:0] dout //,
-// input rst,
-// input clk
+output reg [15:0] dout,
+input wire rst,
+input wire clk
 );
 
-//always @(posedge clk, posedge rst) begin
-always @(addr) begin
-    //if (rst)
-    //    dout <= 16'b0010000000100000;
-    case(addr) 
+always @(posedge clk) begin
+    if (rst)
+        dout <= 16'b0010000000100000;
+    case(addr)
 """
 
 stopmemline = """        default: dout <= 16'b0010000000100000;
@@ -75,15 +74,14 @@ ver.write("\n")
 
 
 startline2 = """module line_mapper(
-//input wire clk,
-//input wire rst,
+input wire clk,
+input wire rst,
 input wire [7:0] line, 
 output reg [19:0] addr);
 
-//always @(posedge clk, posedge rst) begin
-always @(line) begin
-    // if (rst)
-    //     addr <= 20'b000000011000000000;
+always @(posedge clk) begin
+    if (rst)
+        addr <= 20'b000000011000000000;
     case(line)
 """
 

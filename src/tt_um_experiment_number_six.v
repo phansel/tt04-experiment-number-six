@@ -59,15 +59,15 @@ transformer transformer_1 (
 // stores the transforms as packed ascii
 memory_chars memory_1 (
     .addr(mem_addr),
-    .dout(mem_dout) //,
-    // .clk(clk),
-    // .rst(rst)
+    .dout(mem_dout),
+    .clk(clk),
+    .rst(rst)
 );
 
 // gets the appropriate indices for each line
 line_mapper line_mapper_1 (
-    // .clk(clk),
-    // .rst(rst),
+    .clk(clk),
+    .rst(rst),
     .line(line),
     .addr(pointer_addr)
 );

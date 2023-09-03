@@ -28,20 +28,19 @@ reg started;
 reg [3:0] which_state;
 
 always @(posedge clk) begin
-    if ((rst) && (~start)) begin
+    if (rst) begin
         mem_addr <= 10'b1111111111;
         chars_remaining <= 10'd0;
         started <= 1'b0;
         which_state <= 0;
-    end
-    if ((~rst) && (~start)) begin
+    end else if (~start) begin
         mem_addr <= line_start;
         chars_remaining <= line_len;
         started <= 1'b0;
         which_state <= 1;
     end
     else begin
-        if ( (chars_remaining > 0) && (started) ) begin
+        if ((chars_remaining > 0)) begin
         mem_addr <= mem_addr + 1;
         chars_remaining <= chars_remaining - 1;
         which_state <= 2;
