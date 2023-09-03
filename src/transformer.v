@@ -3,12 +3,12 @@ input wire start, // goes high when the user wants to start printing
 input wire [7:0] line, // which line do we want?
 input wire clk,        // clock
 input wire rst,      // reset
+input wire [19:0] pointer_addr, // what is the array ref for this txform?
+input wire [15:0] mem_dout, // what's the dat
+output reg [9:0] mem_addr, // which address in memory has our chars?a
+output reg [9:0] chars_remaining,
 output wire [7:0] lhs, // input version
 output wire [7:0] rhs, // transformed version
-input wire [19:0] pointer_addr, // what is the array ref for this txform?
-output reg [9:0] mem_addr, // which address in memory has our chars?
-input wire [15:0] mem_dout, // what's the data
-output reg [9:0] chars_remaining,
 output reg [3:0] which_state
 );
 

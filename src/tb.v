@@ -18,6 +18,7 @@ module tb();
     initial begin
         $dumpfile ("tb.vcd");
         $dumpvars (0, tb);
+        uio_in = 8'd0;
         //rst_n = 1;
         //ui_in = 0;
         //#1;
