@@ -1,5 +1,5 @@
 module memory_chars(
-input wire [9:0] addr,
+input wire [9:0] mem_addr,
 output reg [15:0] dout,
 input wire rst,
 input wire clk
@@ -8,7 +8,7 @@ input wire clk
 always @(posedge clk) begin
     if (rst)
         dout <= 16'b0010000000100000;
-    case(addr)
+    case(mem_addr)
         10'b0000000000: dout <= 16'b0011000100110001;
         10'b0000000001: dout <= 16'b0010111100100000;
         10'b0000000010: dout <= 16'b0111001100100000;
@@ -31,15 +31,15 @@ module line_mapper(
 input wire clk,
 input wire rst,
 input wire [7:0] line, 
-output reg [19:0] addr);
+output reg [19:0] pointer_addr);
 
 always @(posedge clk) begin
     if (rst)
-        addr <= 20'b000000011000000000;
+        pointer_addr <= 20'b000000011000000000;
     case(line)
-    8'b00000000: addr <= 20'b00000000110000000000;
-    8'b00000001: addr <= 20'b00000001010000000101;
-    default: addr <= 20'b00000000110000000000;
+    8'b00000000: pointer_addr <= 20'b00000000110000000000;
+    8'b00000001: pointer_addr <= 20'b00000001010000000101;
+    default: pointer_addr <= 20'b00000000110000000000;
     endcase;
 end
 

@@ -7,7 +7,7 @@ linestoread=2
 line = 0
 
 startmemline = """module memory_chars(
-input wire [9:0] addr,
+input wire [9:0] mem_addr,
 output reg [15:0] dout,
 input wire rst,
 input wire clk
@@ -16,7 +16,7 @@ input wire clk
 always @(posedge clk) begin
     if (rst)
         dout <= 16'b0010000000100000;
-    case(addr)
+    case(mem_addr)
 """
 
 stopmemline = """        default: dout <= 16'b0010000000100000;
@@ -77,11 +77,11 @@ startline2 = """module line_mapper(
 input wire clk,
 input wire rst,
 input wire [7:0] line, 
-output reg [19:0] addr);
+output reg [19:0] pointer_addr);
 
 always @(posedge clk) begin
     if (rst)
-        addr <= 20'b000000011000000000;
+        pointer_addr <= 20'b000000011000000000;
     case(line)
 """
 
@@ -96,13 +96,13 @@ print(where)
 while linestowrite >0:
     str_to_write = ""
     number_of_this_line = "{0:010b}".format(where[line][1]) + "{0:010b}".format(where[line][0])
-    str_to_write += "    8'b" + "{0:08b}".format(line) + ": addr <= 20'b" + number_of_this_line + ";\n"
+    str_to_write += "    8'b" + "{0:08b}".format(line) + ": pointer_addr <= 20'b" + number_of_this_line + ";\n"
     print(str_to_write)
     linestowrite -= 1
     line += 1
     ver.write(str_to_write)
 
-endline_line_mapper = """    default: addr <= 20'b00000000110000000000;
+endline_line_mapper = """    default: pointer_addr <= 20'b00000000110000000000;
     endcase;
 end
 
