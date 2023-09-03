@@ -42,9 +42,9 @@ module tb();
     .uio_oe(uio_oe),
     .ena(ena),
     .clk(clk),
-    .rst_n(rst_n),
-    .chars_remaining(chars_remaining),
-    .which_state(which_state)
+    .rst_n(rst_n)
+    // .chars_remaining(chars_remaining),
+    // .which_state(which_state)
     );
 
 endmodule

@@ -8,9 +8,9 @@ module tt_um_experiment_number_six (
     output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
     input  wire       clk,      // clock
-    input  wire       rst_n,     // reset_n - low to reset
-    output wire [9:0] chars_remaining,
-    output wire [3:0] which_state
+    input  wire       rst_n     // reset_n - low to reset
+    // output wire [9:0] chars_remaining,
+    // output wire [3:0] which_state
 );
 
 
@@ -25,6 +25,10 @@ reg [7:0] direction_reg;
 assign direction_reg = 8'hFF;
 
 assign uio_oe = direction_reg;
+
+
+wire [9:0] chars_remaining;
+wire [3:0] which_state;
 
 wire [5:0] fn_id;
 
