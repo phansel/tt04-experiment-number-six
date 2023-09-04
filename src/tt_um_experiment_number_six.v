@@ -1,6 +1,6 @@
 `default_nettype none
 
-module tt_um_experiment_number_six (
+module tt_um_laplace_lut (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
     input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
@@ -21,19 +21,9 @@ module tt_um_experiment_number_six (
 
 assign uio_oe = 8'hFF;
 
-
+// debug
 wire [9:0] chars_remaining;
 wire [3:0] which_state;
-
-wire [5:0] fn_id;
-
-reg [1:0] cnt_div_pre; // divide the clock by 2**(2**(cnt_div*2))
-// 2**(2**(0*2)) = 2
-// 2**(2**(1*2)) = 2**4 = 16
-// 2**(2**(2*2)) = 2**16 = 65536
-// 2**(2**3) = 2**8 = 256
-
-reg [31:0] cnt;
 
 wire start;
 wire [7:0] line;
@@ -82,7 +72,7 @@ memory_chars memory_1 (
 
 // gets the appropriate indices for each line
 line_mapper line_mapper_1 (
-    .clk(clk),
+    .clk(clk_buffered),
     .rst(rst),
     .line(line),
     .pointer_addr(pointer_addr)

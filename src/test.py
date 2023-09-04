@@ -41,7 +41,7 @@ async def test_txformer(dut):
         res_dict[x] = [lhs, rhs]
     tex.close()
     for txform_to_test in range(total_txforms):
-        dut._log.info("testing txform " + str(txform_to_test))
+        #dut._log.info("testing txform " + str(txform_to_test))
         await Timer(2.5, units="us")
         dut.ui_in.value = 0b10000000 + txform_to_test;
         dut.rst_n.value = 0;
@@ -50,18 +50,18 @@ async def test_txformer(dut):
         await Timer(3, units="us")
         dut.ui_in.value = 0b11000000 + txform_to_test;
         max_count = 7 + len(res_dict[txform_to_test][0]) + 20
-        dut._log.info(len(res_dict[txform_to_test][0]))
+        #dut._log.info(len(res_dict[txform_to_test][0]))
         for char in range(len(res_dict[txform_to_test][0])):
             #dut.clk.value = 0;
             await Timer(1, units="us")
             #dut.clk.value = 1;
             await Timer(1, units="us")
             # use the chr(ord("c")) function to get ascii->char
-            dut._log.info("seeing lhs: '" + chr(dut.uio_out.value) + "'")
-            dut._log.info("seeing rhs: '" + chr(dut.uo_out.value) + "'")
-            dut._log.info("expecting lhs: '" + (res_dict[txform_to_test][0][char]) + "'")
+            #dut._log.info("seeing lhs: '" + chr(dut.uio_out.value) + "'")
+            #dut._log.info("seeing rhs: '" + chr(dut.uo_out.value) + "'")
+            #dut._log.info("expecting lhs: '" + (res_dict[txform_to_test][0][char]) + "'")
             # targeted_lhs = (res_dict[0][0][char]) + "'")
-            dut._log.info("expecting rhs: '" + (res_dict[txform_to_test][1][char]) + "'")
+            #dut._log.info("expecting rhs: '" + (res_dict[txform_to_test][1][char]) + "'")
             assert chr(dut.uio_out.value) == res_dict[txform_to_test][0][char], "failed to match lhs!"
             assert chr(dut.uo_out.value) == res_dict[txform_to_test][1][char], "failed to match rhs!"
         await Timer(3, units="us")

@@ -19,18 +19,9 @@ module tb();
         $dumpfile ("tb.vcd");
         $dumpvars (0, tb);
         uio_in = 8'd0;
-        //rst_n = 1;
-        //ui_in = 0;
-        //#1;
-        //rst_n = 0;
-        //#5;
-        //rst_n = 1;
     end
 
-
-
-
-    tt_um_experiment_number_six tt_um_experiment_number_six_1 (
+    tt_um_laplace_lut tt_um_laplace_lut_1 (
     `ifdef GL_TEST
         .VPWR( 1'b1),
         .VGND( 1'b0),
