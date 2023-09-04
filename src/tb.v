@@ -21,7 +21,7 @@ module tb();
         uio_in = 8'd0;
     end
 
-    tt_um_laplace_lut tt_um_laplace_lut_1 (
+    tt_um_phansel_laplace_lut tt_um_laplace_lut_1 (
     `ifdef GL_TEST
         .VPWR( 1'b1),
         .VGND( 1'b0),
