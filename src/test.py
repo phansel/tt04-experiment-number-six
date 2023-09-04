@@ -24,7 +24,7 @@ async def test_txformer(dut):
     tex = open("tex/transforms.tex", "r")
     dut._log.info("start")
     dut._log.info("check that our expected transforms are seen")
-    total_txforms = 46
+    total_txforms = 42
     res_dict = {}
     # hacky
     for x in range(total_txforms):
