@@ -48,7 +48,7 @@ documentation:
   inputs:               
     - ui_in[5:0] : set the desired Laplace transform
     - ui_in[6] : start printing out the character at 1 char/clock.
-    - ui_in[7] : clock division parameter: if 1, divide by 1; if 0, divide by 50_000_000 to print more slowly
+    - ui_in[7] : clock division parameter; divide by 1 if 1, else divide by 50 million to print more slowly
 
 # A description of what the outputs do (e.g. status LED, SPI MISO, etc)
   outputs:
