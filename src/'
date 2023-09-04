@@ -12,7 +12,7 @@ project:
   top_module:  "tt_um_experiment_number_six"      # Put the name of your top module here, must start with "tt_um_". Make it unique by including your github username
 
 # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "2x2"    # Valid values: 1x1, 1x2, 2x2, 4x2 or 8x2 
+  tiles: "4x2"    # Valid values: 1x1, 1x2, 2x2, 4x2 or 8x2 
 
 # Keep a track of the submission yaml
 yaml_version: 4
@@ -25,7 +25,7 @@ documentation:
   author:       "Paul Hansel"
   title:        "Experiment Number Six"
   language:     "Verilog" 
-  description:  "ASCII ROM encoding the LaTeX characters needed to typeset the Laplace transforms of a few specialized functions."
+  description:  "ASCII ROM encoding the LaTeX characters needed to typeset the Laplace transforms of a few functions."
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |

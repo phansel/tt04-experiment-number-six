@@ -53,10 +53,32 @@ always @(posedge clk) begin
             end
         end
     end
-    /*
-    else if (chars_remaining == 0) begin
-        mem_addr = 8'hFF;
-    */
+end
+
+endmodule
+
+// divide the 50 MHz clock to 1s
+module clk_div_50M #(parameter CLK_DIV = 26'd50000000) (input wire rst, input wire clk_fast, input wire fast_or_slow, output reg clk_out);
+
+reg [25:0] counter;
+reg clk_slow;
+
+assign clk_out = fast_or_slow ? clk_fast : clk_slow;
+
+always @(posedge clk_fast) begin
+    if (rst) begin
+        counter <= 26'd0;
+        clk_slow <= 1'b0;
+    end
+    else begin
+        if (counter < CLK_DIV) begin
+            counter <= counter + 1;
+        end
+        else begin
+            counter <= 26'd0;
+            clk_slow <= ~clk_slow;
+        end
+    end
 end
 
 endmodule

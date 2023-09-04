@@ -19,11 +19,12 @@ async def test_txformer(dut):
     clock = Clock(dut.clk, 2, units="us")
     dut.rst_n.value = 1;
     dut.ena.value = 1;
+    dut.ui_in.value = 0b10000000
     cocotb.start_soon(clock.start())
     tex = open("tex/transforms.tex", "r")
     dut._log.info("start")
     dut._log.info("check that our expected transforms are seen")
-    total_txforms = 46
+    total_txforms = 49
     res_dict = {}
     # hacky
     for x in range(total_txforms):
@@ -42,13 +43,12 @@ async def test_txformer(dut):
     for txform_to_test in range(total_txforms):
         dut._log.info("testing txform " + str(txform_to_test))
         await Timer(2.5, units="us")
-        dut.ui_in.value = 0;
-        dut.ui_in.value = txform_to_test;
+        dut.ui_in.value = 0b10000000 + txform_to_test;
         dut.rst_n.value = 0;
         await Timer(2.5, units="us")
         dut.rst_n.value = 1;
         await Timer(3, units="us")
-        dut.ui_in.value = 0b01000000 + txform_to_test;
+        dut.ui_in.value = 0b11000000 + txform_to_test;
         max_count = 7 + len(res_dict[txform_to_test][0]) + 20
         dut._log.info(len(res_dict[txform_to_test][0]))
         for char in range(len(res_dict[txform_to_test][0])):
@@ -65,6 +65,6 @@ async def test_txformer(dut):
             assert chr(dut.uio_out.value) == res_dict[txform_to_test][0][char], "failed to match lhs!"
             assert chr(dut.uo_out.value) == res_dict[txform_to_test][1][char], "failed to match rhs!"
         await Timer(3, units="us")
-        dut.ui_in.value = 0
+        dut.ui_in.value = 0b10000000
         dut.rst_n.value = 0
         await ClockCycles(dut.clk, max_count)
