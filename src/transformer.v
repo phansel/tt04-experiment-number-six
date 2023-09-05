@@ -58,7 +58,7 @@ end
 endmodule
 
 // divide the 50 MHz clock to 1s
-module clk_div_50M #(parameter CLK_DIV = 26'd50000000) (input wire rst, input wire clk_fast, input wire fast_or_slow, output reg clk_out);
+module clk_div_50M #(parameter CLK_DIV = 26'd50000000) (input wire rst, input wire clk_fast, input wire fast_or_slow, output wire clk_out);
 
 reg [25:0] counter;
 reg clk_slow;
